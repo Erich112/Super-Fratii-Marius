@@ -1,0 +1,302 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "PaooGame.UI.MainMenu#Draw(Graphics)",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "PaooGame.UI.MainMenu",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1161975619 { 
+   	label=PaooGame
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1634028579 { 
+   	label=Game
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Game1161975619XXXGetHeight0[
+	label="+ GetHeight()"
+	style=filled
+	fillcolor=white
+	tooltip="Game
+
+null"
+	fontcolor=darkgreen
+];
+
+Game1161975619XXXGetWidth0[
+	label="+ GetWidth()"
+	style=filled
+	fillcolor=white
+	tooltip="Game
+
+null"
+	fontcolor=darkgreen
+];
+
+Game1161975619XXXrun0[
+	label="+ run()"
+	style=filled
+	fillcolor=white
+	tooltip="Game
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_447183535 { 
+   	label=RefLinks
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   RefLinks1161975619XXXGetGame0[
+	label="+ GetGame()"
+	style=filled
+	fillcolor=white
+	tooltip="RefLinks
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1569541470 { 
+   	label=GameWindow
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_51986691 { 
+   	label=GameWindow
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   GameWindow62546477XXXGetWndHeight0[
+	label="+ GetWndHeight()"
+	style=filled
+	fillcolor=white
+	tooltip="GameWindow
+
+null"
+	fontcolor=darkgreen
+];
+
+GameWindow62546477XXXGetWndWidth0[
+	label="+ GetWndWidth()"
+	style=filled
+	fillcolor=white
+	tooltip="GameWindow
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_165351083 { 
+   	label=Graphics
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1293952970 { 
+   	label=ImageLoader
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ImageLoader399451382XXXLoadImage1808118735[
+	label="+ LoadImage()"
+	style=filled
+	fillcolor=white
+	tooltip="ImageLoader
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1808614878 { 
+   	label=States
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1703458607 { 
+   	label=MenuState
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MenuState2017322797XXXDraw165351083[
+	label="+ Draw()"
+	style=filled
+	fillcolor=white
+	tooltip="MenuState
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_172764560 { 
+   	label=State
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   State2017322797XXXDraw165351083[
+	label="+ Draw()"
+	style=filled
+	fillcolor=white
+	tooltip="State
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2708 { 
+   	label=UI
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_104934976 { 
+   	label=MenuButton
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MenuButton1020693217XXXDraw1317632459[
+	label="+ Draw()"
+	style=filled
+	fillcolor=white
+	tooltip="MenuButton
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_2010038585 { 
+   	label=MainMenu
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MainMenu1020693217XXXDraw165351083[
+	label="+ Draw()"
+	style=filled
+	fillcolor=white
+	tooltip="MainMenu
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+} 
+
+'edges    
+Game1161975619XXXGetHeight0 -> GameWindow62546477XXXGetWndHeight0;
+Game1161975619XXXGetWidth0 -> GameWindow62546477XXXGetWndWidth0;
+Game1161975619XXXrun0 -> State2017322797XXXDraw165351083;
+MainMenu1020693217XXXDraw165351083 -> Game1161975619XXXGetHeight0;
+MainMenu1020693217XXXDraw165351083 -> Game1161975619XXXGetWidth0;
+MainMenu1020693217XXXDraw165351083 -> ImageLoader399451382XXXLoadImage1808118735;
+MainMenu1020693217XXXDraw165351083 -> MenuButton1020693217XXXDraw1317632459;
+MainMenu1020693217XXXDraw165351083 -> RefLinks1161975619XXXGetGame0;
+MenuState2017322797XXXDraw165351083 -> MainMenu1020693217XXXDraw165351083;
+State2017322797XXXDraw165351083 -> MenuState2017322797XXXDraw165351083;
+    
+}
+@enduml

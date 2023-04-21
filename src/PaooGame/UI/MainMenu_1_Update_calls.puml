@@ -1,0 +1,212 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "PaooGame.UI.MainMenu#Update()",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "PaooGame.UI.MainMenu",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1161975619 { 
+   	label=PaooGame
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1634028579 { 
+   	label=Game
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Game1161975619XXXGetKeyManager0[
+	label="+ GetKeyManager()"
+	style=filled
+	fillcolor=white
+	tooltip="Game
+
+null"
+	fontcolor=darkgreen
+];
+
+Game1161975619XXXrun0[
+	label="+ run()"
+	style=filled
+	fillcolor=white
+	tooltip="Game
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_447183535 { 
+   	label=RefLinks
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   RefLinks1161975619XXXGetKeyManager0[
+	label="+ GetKeyManager()"
+	style=filled
+	fillcolor=white
+	tooltip="RefLinks
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1808614878 { 
+   	label=States
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1703458607 { 
+   	label=MenuState
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MenuState2017322797XXXUpdate0[
+	label="+ Update()"
+	style=filled
+	fillcolor=white
+	tooltip="MenuState
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_172764560 { 
+   	label=State
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   State2017322797XXXUpdate0[
+	label="+ Update()"
+	style=filled
+	fillcolor=white
+	tooltip="State
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2708 { 
+   	label=UI
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_2010038585 { 
+   	label=MainMenu
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MainMenu1020693217XXXUpdate0[
+	label="+ Update()"
+	style=filled
+	fillcolor=white
+	tooltip="MainMenu
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+} 
+
+'edges    
+Game1161975619XXXrun0 -> State2017322797XXXUpdate0;
+MainMenu1020693217XXXUpdate0 -> RefLinks1161975619XXXGetKeyManager0;
+MenuState2017322797XXXUpdate0 -> MainMenu1020693217XXXUpdate0;
+RefLinks1161975619XXXGetKeyManager0 -> Game1161975619XXXGetKeyManager0;
+State2017322797XXXUpdate0 -> MenuState2017322797XXXUpdate0;
+    
+}
+@enduml
