@@ -12,10 +12,13 @@ public class MenuButton {
     public static final int BTN_HEIGHT = 60;                       /*!< Inaltimea unei dale.*/
     public boolean isSelected = false;
 
-    protected BufferedImage img;                                    /*!< Imaginea aferenta tipului de dala.*/
-    public MenuButton(BufferedImage image)
+    protected BufferedImage img;
+    protected BufferedImage imgSelected;
+
+    public MenuButton(BufferedImage image, BufferedImage imageSelected)
     {
-        img = image;
+        this.img = image;
+        this.imgSelected = imageSelected;
     }
 
     /*! \fn public void Update()
@@ -35,6 +38,16 @@ public class MenuButton {
     public void Draw(Graphics g, int x, int y)
     {
         /// Desenare
-        g.drawImage(img, x, y, BTN_WIDTH, BTN_HEIGHT, null);
+        if(isSelected)
+            g.drawImage(imgSelected, x, y, BTN_WIDTH, BTN_HEIGHT, null);
+        else
+            g.drawImage(img, x, y, BTN_WIDTH, BTN_HEIGHT, null);
+
     }
+
+    // Reseteaza starea butonului la starea default
+    public void Reset(){
+        isSelected = false;
+    }
+
 }

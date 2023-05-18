@@ -13,7 +13,7 @@ import PaooGame.Graphics.Assets;
     */
     public AirTile(int id)
     {
-        super(Assets.air, id);
+        super(Assets.GetInstance().air, id);
     }
 
     /*! \fn public boolean IsSolid()

@@ -1,7 +1,6 @@
 package PaooGame;
 import PaooGame.UI.*;
 import PaooGame.Maps.Map;
-
 import PaooGame.Input.KeyManager;
 
 /*! \class public class RefLinks
@@ -86,5 +85,7 @@ public class RefLinks
         this.map = map;
     }
     public Camera GetCamera() {return camera;}
-    public void SetCamera() {this.camera = camera;}
+    public void SetCamera(Camera camera) {this.camera = camera;}
+    public MainMenu GetMenu() {return menu;}
+    public void SetMenu(MainMenu menu) {this.menu = menu;}
 }

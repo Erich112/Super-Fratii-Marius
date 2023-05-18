@@ -1,11 +1,14 @@
 package PaooGame;
-
+import java.sql.*;
 import PaooGame.GameWindow.GameWindow;
 import PaooGame.Graphics.Assets;
 import PaooGame.Input.KeyManager;
+import PaooGame.Maps.Map;
 import PaooGame.States.*;
+import PaooGame.Tiles.BallTile;
 import PaooGame.Tiles.Tile;
-
+import PaooGame.UI.MainMenu;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -44,6 +47,7 @@ import java.awt.image.BufferStrategy;
  */
 public class Game implements Runnable
 {
+    private Assets assets;
     private GameWindow      wnd;        /*!< Fereastra in care se va desena tabla jocului*/
     private boolean         runState;   /*!< Flag ce starea firului de executie.*/
     private Thread          gameThread; /*!< Referinta catre thread-ul de update si draw al ferestrei*/
@@ -108,7 +112,7 @@ public class Game implements Runnable
             ///Sa ataseaza ferestrei managerul de tastatura pentru a primi evenimentele furnizate de fereastra.
         wnd.GetWndFrame().addKeyListener(keyManager);
             ///Se incarca toate elementele grafice (dale)
-        Assets.Init();
+        assets = Assets.GetInstance();
             ///Se construieste obiectul de tip shortcut ce va retine o serie de referinte catre elementele importante din program.
         refLink = new RefLinks(this);
             ///Definirea starilor programului
@@ -226,9 +230,26 @@ public class Game implements Runnable
                 ///Actualizez starea curenta a jocului daca exista.
             State.GetState().Update();
         }
-        if(GetKeyManager().down && State.GetState() != playState) {
+        if(State.GetState() == menuState && refLink.GetMenu().getButtons()[0].isSelected == true && refLink.GetKeyManager().space)
             State.SetState(playState);
+        if(State.GetState() == menuState && refLink.GetMenu().getButtons()[1].isSelected == true && refLink.GetKeyManager().space)
+            Save();
+        if(State.GetState() == menuState && refLink.GetMenu().getButtons()[2].isSelected == true && refLink.GetKeyManager().space)
+            Load();
+        if(State.GetState() == playState && refLink.GetKeyManager().escape)
+            State.SetState(menuState);
+        if(State.GetState() == playState && refLink.GetMap().Clear == 1) {
+            if(refLink.GetKeyManager().space) {
+                State.SetState(menuState);
+                playState = null;
+                Map.currlevel++;
+                playState = new PlayState(refLink);
+            }
+            if(Map.currlevel==4) {
+                System.exit(0);
+            }
         }
+
     }
 
     /*! \fn private void Draw()
@@ -236,6 +257,73 @@ public class Game implements Runnable
 
         Metoda este declarata privat deoarece trebuie apelata doar in metoda run()
      */
+    public void Save() {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:save.db");
+            //c.setAutoCommit(false);
+            stmt = c.createStatement();
+            String sql;
+            DatabaseMetaData dbm = c.getMetaData();
+            ResultSet tables = dbm.getTables(null, null, "SAVE", null);
+            if (tables.next()) {
+                System.out.println("Save file already exists");
+
+            } else {
+                System.out.println("Save file doesn't exist, creating one");
+                sql = "CREATE TABLE SAVE " +
+                        "(X   FLOAT                  NOT NULL, " +
+                        " Y   FLOAT                  NOT NULL, " +
+                        " HP  INT                  NOT NULL, " +
+                        " SCORE  INT                  NOT NULL, " +
+                        " LEVEL INT                  NOT NULL)";
+                stmt.execute(sql);
+            }
+            sql = "INSERT INTO SAVE (X,Y,HP,SCORE,LEVEL) " +
+                    "VALUES ( 50, 300, 3, 0," + refLink.GetMap().currlevel + ");";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            //c.commit();
+            c.close();
+
+
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Save file created succesfully");
+
+    }
+    public void Load() {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:save.db");
+            //c.setAutoCommit(false);
+            stmt = c.createStatement();
+            String sql;
+            DatabaseMetaData dbm = c.getMetaData();
+            ResultSet tables = dbm.getTables(null, null, "SAVE", null);
+
+            sql = "SELECT * FROM SAVE;";
+            stmt.executeUpdate(sql);
+            ResultSet rs = stmt.executeQuery( sql );
+            while ( rs.next() ) {
+                float x = rs.getFloat("X");
+                float y = rs.getFloat("Y");
+                int life = rs.getInt("HP");
+                int lvl = rs.getInt("LEVEL");
+                int score = rs.getInt("SCORE");
+                refLink.GetMap().SetLevel(2);
+            }
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
     private void Draw()
     {
             /// Returnez bufferStrategy pentru canvasul existent

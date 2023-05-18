@@ -14,7 +14,7 @@ public class StarTile extends Tile
      */
     public StarTile(int id)
     {
-        super(Assets.star, id);
+        super(Assets.GetInstance().star, id);
     }
 
     /*! \fn public boolean IsSolid()

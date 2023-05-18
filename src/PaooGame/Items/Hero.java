@@ -18,14 +18,9 @@ import PaooGame.Tiles.*;
  */
 public class Hero extends Character
 {
-    private int score = 0;
-
+    public int score = 0;
+    private static Hero instance;
     private BufferedImage image;    /*!< Referinta catre imaginea curenta a eroului.*/
-    private float airSpeed = 0;
-    private float gravity = 0.06f;
-    private float jumpSpeed = -3.4f;
-    private float fallSpeedAfterCollision = 0.75f;
-    private boolean inAir = true;
 
     /*! \fn public Hero(RefLinks refLink, float x, float y)
         \brief Constructorul de initializare al clasei Hero.
@@ -39,41 +34,18 @@ public class Hero extends Character
             ///Apel al constructorului clasei de baza
         super(refLink, x,y, Character.DEFAULT_CREATURE_WIDTH, Character.DEFAULT_CREATURE_HEIGHT);
             ///Seteaza imaginea de start a eroului
-        image = Assets.heroLeft;
+        image = Assets.GetInstance().heroLeft;
             ///Stabilieste pozitia relativa si dimensiunea dreptunghiului de coliziune, starea implicita(normala)
         normalBounds.x = 0;
         normalBounds.y = 0;
-        normalBounds.width = 40;
-        normalBounds.height = 60;
+        normalBounds.width = 30;
+        normalBounds.height = 50;
 
             ///Stabilieste pozitia relativa si dimensiunea dreptunghiului de coliziune, starea de atac
         attackBounds.x = 0;
         attackBounds.y = 0;
         attackBounds.width = 48;
         attackBounds.height = 64;
-    }
-    public boolean CanMoveHere(float x, float y) {
-        if(!testSolid(x,y))
-            if(!testSolid(x+width,y+height))
-                if(!testSolid(x+width,y))
-                    if(!testSolid(x,y+height))
-                        return true;
-        return false;
-    }
-    public boolean testSolid(float x, float y) {
-        if (x < 0 || x >= refLink.GetGame().GetWidth()) {
-            return true;
-        }
-        if (y < 0 || y >= refLink.GetGame().GetHeight()) {
-            return true;
-
-        }
-        float xIndex = x / Tile.TILE_WIDTH;
-        float yIndex = y / Tile.TILE_HEIGHT;
-        int val = refLink.GetMap().GetTile((int) xIndex, (int) yIndex).GetId();
-        if (val == GroundTile.groundTile.GetId()) {
-            return true;
-        } else return false;
     }
     /*! \fn public void Update()
         \brief Actualizeaza pozitia si imaginea eroului.
@@ -83,75 +55,32 @@ public class Hero extends Character
     {
         ///Verifica daca a fost apasata o tasta
         GetInput();
-        ///Actualizeaza pozitia
-
-        if (!inAir)
-            if (!IsEntityOnFloor(x,y))
-                inAir = true;
-
-        if(inAir) {
-            if(CanMoveHere(x,y+airSpeed)) {
-                y += airSpeed;
-                airSpeed += gravity;
-                MoveX();
-            }
-            else {
-                y = GetEntityYPosUnderRoofOrAboveFloor(x,y, airSpeed);
-                if (airSpeed > 0) {
-                    inAir = false;
-                    airSpeed = 0;
-                }
-                else {
-                    airSpeed = fallSpeedAfterCollision;
-                }
-                MoveX();
-            }
-        }
-        else MoveX();
+        ///Actualizeaza pozitiadw
+        //cu gravitatie
+        jumpAndGravity();
 
 
 
-
-        /*
-        if(CanMoveHere(x+xMove,y+yMove)) {
+        /* fara gravitatie
+        if(CanMoveHere(x,y))
             Move();
-        }
         */
-
 
         ///Actualizeaza imaginea
         if(refLink.GetKeyManager().left == true)
         {
-            image = Assets.heroLeft;
+            image = Assets.GetInstance().heroLeft;
         }
         if(refLink.GetKeyManager().right == true) {
-            image = Assets.heroRight;
+            image = Assets.GetInstance().heroRight;
         }
     }
-    public boolean IsEntityOnFloor(float x, float y) {
-        // Check the pixel below bottomleft and bottomright
-        if (!testSolid(x, y + height + 1))
-            if (!testSolid(x + width, y + height + 1))
-                return false;
-        return true;
 
-    }
 
-    public float GetEntityYPosUnderRoofOrAboveFloor(float x, float y, float airSpeed) {
-        int currentTile = (int) (y / Tile.TILE_HEIGHT);
-        if (airSpeed > 0) {
-            // Falling - touching floor
-            int tileYPos = currentTile * Tile.TILE_HEIGHT;
-            int yOffset = (height - Tile.TILE_HEIGHT);
-            return tileYPos + yOffset + 16;
-        } else
-            // Jumping
-            return currentTile * Tile.TILE_HEIGHT;
-
-    }
     private void jump() {
-        if(inAir)
+        if(inAir) {
             return;
+        }
        inAir = true;
        airSpeed =  jumpSpeed;
     }
@@ -172,19 +101,19 @@ public class Hero extends Character
 
         }
             ///Verificare apasare tasta "jos"
-        else if(refLink.GetKeyManager().down)
+        if(refLink.GetKeyManager().down)
         {
-            yMove = speed;
+            yMove += speed;
         }
             ///Verificare apasare tasta "left"
-        else if(refLink.GetKeyManager().left)
+        if(refLink.GetKeyManager().left)
         {
-            xMove = -speed;
+            xMove += -speed;
         }
             ///Verificare apasare tasta "dreapta"
-        else if(refLink.GetKeyManager().right)
+        if(refLink.GetKeyManager().right)
         {
-            xMove = speed;
+            xMove += speed;
         }
     }
 
@@ -196,10 +125,18 @@ public class Hero extends Character
     @Override
     public void Draw(Graphics g)
     {
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial",Font.BOLD,20));
         g.drawImage(image, (int)x, (int)y, width, height, null);
-
+        if (life == 3)
+            g.drawImage(Assets.GetInstance().hp3, (int)x, (int)y - 20, width, height, null);
+        if (life == 2)
+            g.drawImage(Assets.GetInstance().hp2, (int)x, (int)y - 20, width, height, null);
+        if (life == 1)
+            g.drawImage(Assets.GetInstance().hp1, (int)x, (int)y - 20, width, height, null);
+        g.drawString("Score: "+ score, 20,20);
         ///doar pentru debug daca se doreste vizualizarea dreptunghiului de coliziune altfel se vor comenta urmatoarele doua linii
-        g.setColor(Color.blue);
-        //g.fillRect((int)(x + bounds.x), (int)(y + bounds.y), bounds.width, bounds.height);
+        //g.setColor(Color.blue);
+        //g.fillRect((int) (x + xDrawOffset), (int) (y + yDrawOffset), normalBounds.width, normalBounds.height);
     }
 }

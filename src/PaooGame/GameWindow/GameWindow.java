@@ -77,6 +77,7 @@ public class GameWindow
 
             /// Creaza obiectul de tip canvas (panza) pe care se poate desena.
         canvas = new Canvas();
+        canvas.setFocusable(false);
             /// In aceeasi maniera trebuiesc setate proprietatile pentru acest obiect
             /// canvas (panza): dimensiuni preferabile, minime, maxime etc.
             /// Urmotorul apel de functie seteaza dimensiunea "preferata"/implicita

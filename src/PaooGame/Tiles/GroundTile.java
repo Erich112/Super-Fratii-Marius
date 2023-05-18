@@ -15,7 +15,7 @@ public class GroundTile extends Tile
     public GroundTile(int id)
     {
             /// Apel al constructorului clasei de baza
-        super(Assets.ground, id);
+        super(Assets.GetInstance().ground, id);
     }
     public boolean isSolid() {
         return true;

@@ -1,5 +1,7 @@
 package PaooGame.Tiles;
 
+import PaooGame.Graphics.Assets;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -63,16 +65,16 @@ public abstract class Tile
     public BufferedImage GetImage(int id)
     {
         switch(id){
-            case 0: return airTile.img;
-            case 1: return pillsTile.img;
-            case 2: return groundTile.img;
-            case 3: return starTile.img;
-            case 4: return ballTile.img;
+            case 0: return Assets.GetInstance().air;
+            case 1: return Assets.GetInstance().pills;
+            case 2: return Assets.GetInstance().ground;
+            case 3: return Assets.GetInstance().star;
+            case 4: return Assets.GetInstance().ball;
         }
         return null;
     }
     public void SetImage(int id){
-        img = GetImage(id);
+        this.img = GetImage(id);
     }
 
     /*! \fn public boolean IsSolid()
@@ -88,5 +90,16 @@ public abstract class Tile
     public int GetId()
     {
         return id;
+    }
+    public static Tile GetTile(int id){
+
+        switch(id){
+            case 0: return airTile;
+            case 1: return pillsTile;
+            case 2: return groundTile;
+            case 3: return starTile;
+            case 4: return ballTile;
+        }
+        return null;
     }
 }

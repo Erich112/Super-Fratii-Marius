@@ -1,0 +1,757 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "PaooGame.Game",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1161975619 { 
+   	label=PaooGame
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Camera1161975619[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Camera</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   height: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   refLink: RefLinks [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   width: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   x: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   y: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ CameraToMapX(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ CameraToMapY(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ MapToCameraX(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ MapToCameraY(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Game1161975619[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Game</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   aboutState: State [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   assets: Assets [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   bs: BufferStrategy [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   g: Graphics [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gameThread: Thread [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   keyManager: KeyManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   menuState: State [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   playState: State [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   refLink: RefLinks [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   runState: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   settingsState: State [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tile: Tile [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wnd: GameWindow [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- Draw()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetHeight(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetKeyManager(): KeyManager</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWidth(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- InitGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Load()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Save()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ StartGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ StopGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >- Update()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ run()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RefLinks1161975619[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RefLinks</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   camera: Camera [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   game: Game [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   map: Map [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   menu: MainMenu [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetCamera(): Camera</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetGame(): Game</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetHeight(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetKeyManager(): KeyManager</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetMap(): Map</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetMenu(): MainMenu</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWidth(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetCamera(camera: Camera)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetGame(game: Game)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetMap(map: Map)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetMenu(menu: MainMenu)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1569541470 { 
+   	label=GameWindow
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   GameWindow62546477[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GameWindow</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   canvas: Canvas [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wndFrame: JFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wndHeight: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wndTitle: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wndWidth: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ BuildGameWindow()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetCanvas(): Canvas</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWndFrame(): JFrame</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWndHeight(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWndWidth(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_165351083 { 
+   	label=Graphics
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Assets399451382[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Assets</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   air: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   ball: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   credits: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   creditsSelected: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   enemyDog: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   ground: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   gunLeft: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   gunRight: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   heroLeft: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   heroRight: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   hp1: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   hp2: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   hp3: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   load: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   loadSelected: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   pills: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   play: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   playSelected: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   save: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   saveSelected: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   settings: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   settingsSelected: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   star: BufferedImage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetInstance(): Assets</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ImageLoader399451382[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ImageLoader</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ LoadImage(path: String): BufferedImage</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1808614878 { 
+   	label=States
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   AboutState2017322797[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AboutState</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MenuState2017322797[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MenuState</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   menu: MainMenu [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PlayState2017322797[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PlayState</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   enemy: Enemy [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gun: Gun [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   hero: Hero [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   leftBorder: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   map: Map [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   maxLvlOffsetX: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   maxTilesOffset: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rightBorder: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   xLvlOffset: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+<TR><TD ALIGN="LEFT" >- checkCloseBorder()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SettingsState2017322797[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SettingsState</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+State2017322797[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)State</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   refLink: RefLinks [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetState(): State</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetState(state: State)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2390711 { 
+   	label=Maps
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Map1633849726[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Map</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   background: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   crazylvl: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   currlevel: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   height: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   refLink: RefLinks [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tiles: int[][] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   width: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ ChangeTile(x: int, y: int, id: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetHeigth_Pixels(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetHeigth_Tiles(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetLevel(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetTile(x: int, y: int): Tile</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetTileMap(): int[][]</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWidth_Pixels(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWidth_Tiles(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- LoadWorld(lvl: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetLevel(lvl: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+<TR><TD ALIGN="LEFT" >- importImg(bg: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2708 { 
+   	label=UI
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   MainMenu1020693217[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MainMenu</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   background: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttons: MenuButton[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   copyright: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   currentBtn: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   height: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   refLink: RefLinks [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   title: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   updateButtons: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   width: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MenuButton1020693217[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MenuButton</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   img: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   imgSelected: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   isSelected: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   x: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   y: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics, x: int, y: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Reset()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_70805418 { 
+   	label=Input
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   KeyManager886959423[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)KeyManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   down: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   escape: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   keys: boolean[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   left: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   right: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   space: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   up: boolean [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ keyPressed(e: KeyEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ keyReleased(e: KeyEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ keyTyped(e: KeyEvent)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_70973344 { 
+   	label=Items
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Character887127349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Character</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   airSpeed: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   fallSpeedAfterCollision: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   gravity: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   heldGun: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   inAir: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   jumpSpeed: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   life: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   speed: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   xMove: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   yMove: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ CanMoveHere(x: float, y: float): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetEntityXPosNextToWall(x: float, y: float, xSpeed: float): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetEntityYPosUnderRoofOrAboveFloor(x: float, y: float, airSpeed: float): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetLife(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetSpeed(): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetXMove(): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetYMove(): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ IsEntityOnFloor(x: float, y: float): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Move()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ MoveX()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ MoveY()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetLife(life: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetSpeed(speed: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetXMove(xMove: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetYMove(yMove: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ jumpAndGravity()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testSolid(x: float, y: float): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateXPos(xSpeed: float)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Enemy887127349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Enemy</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   image: BufferedImage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Gun887127349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Gun</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   bullets: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   image: BufferedImage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetXY(Nx: float, Ny: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Hero887127349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Hero</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   image: BufferedImage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   score: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >- GetInput()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+<TR><TD ALIGN="LEFT" >- jump()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Item887127349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Item</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   attackBounds: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   bounds: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   height: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   normalBounds: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   refLink: RefLinks [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   width: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   x: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   xDrawOffset: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   y: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   yDrawOffset: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetHeight(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetWidth(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetX(): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetY(): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetAttackMode()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetHeight(height: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetNormalMode()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetWidth(width: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetX(x: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetY(y: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_80810853 { 
+   	label=Tiles
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   AirTile896964858[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AirTile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ IsSolid(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BallTile896964858[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BallTile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ IsSolid(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GroundTile896964858[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GroundTile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetId(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PillsTile896964858[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PillsTile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ IsSolid(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+StarTile896964858[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)StarTile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ GetId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ IsSolid(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Tile896964858[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Tile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   img: BufferedImage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Draw(g: Graphics, x: int, y: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetImage(id: int): BufferedImage</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetTile(id: int): Tile</TD></TR>
+<TR><TD ALIGN="LEFT" >+ IsSolid(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SetImage(id: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Update()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Camera1161975619 -> RefLinks1161975619[label="refLink
+[0..1]"];
+Character887127349 -> Enemy887127349[arrowhead=none, arrowtail=empty, dir=both];
+Character887127349 -> Hero887127349[arrowhead=none, arrowtail=empty, dir=both];
+Game1161975619 -> Assets399451382[label="assets
+[0..1]"];
+Game1161975619 -> GameWindow62546477[label="wnd
+[0..1]"];
+Game1161975619 -> KeyManager886959423[label="keyManager
+[0..1]"];
+Game1161975619 -> Map1633849726[label="Load() -> SetLevel()"];
+Game1161975619 -> RefLinks1161975619[label="refLink
+[0..1]"];
+Game1161975619 -> State2017322797[label="aboutState
+[0..1]"];
+Game1161975619 -> State2017322797[label="menuState
+[0..1]"];
+Game1161975619 -> State2017322797[label="playState
+[0..1]"];
+Game1161975619 -> State2017322797[label="settingsState
+[0..1]"];
+Game1161975619 -> Tile896964858[label="tile
+[0..1]"];
+Item887127349 -> Character887127349[arrowhead=none, arrowtail=empty, dir=both];
+Item887127349 -> Gun887127349[arrowhead=none, arrowtail=empty, dir=both];
+Item887127349 -> RefLinks1161975619[label="refLink
+[0..1]"];
+MainMenu1020693217 -> MenuButton1020693217[label="buttons
+[0..*]"];
+MainMenu1020693217 -> RefLinks1161975619[label="refLink
+[0..1]"];
+Map1633849726 -> RefLinks1161975619[label="refLink
+[0..1]"];
+MenuState2017322797 -> MainMenu1020693217[label="menu
+[0..1]"];
+PlayState2017322797 -> Enemy887127349[label="enemy
+[0..1]"];
+PlayState2017322797 -> Gun887127349[label="gun
+[0..1]"];
+PlayState2017322797 -> Hero887127349[label="hero
+[0..1]"];
+PlayState2017322797 -> Map1633849726[label="map
+[0..1]"];
+RefLinks1161975619 -> Camera1161975619[label="camera
+[0..1]"];
+RefLinks1161975619 -> Game1161975619[label="game
+[0..1]"];
+RefLinks1161975619 -> MainMenu1020693217[label="menu
+[0..1]"];
+RefLinks1161975619 -> Map1633849726[label="map
+[0..1]"];
+State2017322797 -> AboutState2017322797[arrowhead=none, arrowtail=empty, dir=both];
+State2017322797 -> MenuState2017322797[arrowhead=none, arrowtail=empty, dir=both];
+State2017322797 -> PlayState2017322797[arrowhead=none, arrowtail=empty, dir=both];
+State2017322797 -> RefLinks1161975619[label="refLink
+[0..1]"];
+State2017322797 -> SettingsState2017322797[arrowhead=none, arrowtail=empty, dir=both];
+Tile896964858 -> AirTile896964858[arrowhead=none, arrowtail=empty, dir=both];
+Tile896964858 -> BallTile896964858[arrowhead=none, arrowtail=empty, dir=both];
+Tile896964858 -> GroundTile896964858[arrowhead=none, arrowtail=empty, dir=both];
+Tile896964858 -> PillsTile896964858[arrowhead=none, arrowtail=empty, dir=both];
+Tile896964858 -> StarTile896964858[arrowhead=none, arrowtail=empty, dir=both];
+    
+}
+@enduml

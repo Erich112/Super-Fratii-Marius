@@ -1,5 +1,6 @@
 package PaooGame.Maps;
 
+import PaooGame.Graphics.Assets;
 import PaooGame.RefLinks;
 import PaooGame.Tiles.Tile;
 
@@ -7,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Scanner;
 
 /*! \class public class Map
     \brief Implementeaza notiunea de harta a jocului.
@@ -14,12 +16,13 @@ import java.io.*;
 public class Map
 {
     private BufferedImage background;
-
-
+    public static int currlevel = 1;
+    private int crazylvl = -1;
     private RefLinks refLink;   /*!< O referinte catre un obiect "shortcut", obiect ce contine o serie de referinte utile in program.*/
     private int width;          /*!< Latimea hartii in numar de dale.*/
     private int height;         /*!< Inaltimea hartii in numar de dale.*/
     private int [][] tiles;     /*!< Referinta catre o matrice cu codurile dalelor ce vor construi harta.*/
+    public int Clear = 0;
 
     /*! \fn public Map(RefLinks refLink)
         \brief Constructorul de initializare al clasei.
@@ -31,7 +34,7 @@ public class Map
             /// Retine referinta "shortcut".
         this.refLink = refLink;
             ///incarca harta de start. Functia poate primi ca argument id-ul hartii ce poate fi incarcat.
-        LoadWorld(1);
+        LoadWorld(currlevel);
 
         importImg("/textures/cer.png");
     }
@@ -97,11 +100,11 @@ public class Map
         g.drawImage(background, 0, 0, Tile.TILE_WIDTH*width, height*Tile.TILE_HEIGHT,null);
 
             ///Se parcurge matricea de dale (codurile aferente) si se deseneaza harta respectiva
-        for(int y = 0; y < refLink.GetGame().GetHeight()/Tile.TILE_HEIGHT; y++)
+        for(int y = 0; y < height; y++)
         {
-            for(int x = 0; x < refLink.GetGame().GetWidth()/Tile.TILE_WIDTH; x++)
+            for(int x = 0; x < width; x++)
             {
-                GetTile(x, y).Draw(g, (int)x * Tile.TILE_HEIGHT, (int)y * Tile.TILE_WIDTH);
+                GetTile(x, y).Draw(g, (int)(x * Tile.TILE_HEIGHT), (int)y * Tile.TILE_WIDTH);
             }
         }
     }
@@ -114,16 +117,7 @@ public class Map
      */
     public Tile GetTile(int x, int y)
     {
-        if(x < 0 || y < 0 || x >= width || y >= height)
-        {
-            return Tile.groundTile;
-        }
-        Tile t = Tile.tiles[tiles[x][y]];
-        if(t == null)
-        {
-            return Tile.pillsTile;
-        }
-        return t;
+        return Tile.GetTile(tiles[x][y]);
     }
 
     /*! \fn private void LoadWorld()
@@ -135,19 +129,62 @@ public class Map
         //atentie latimea si inaltimea trebuiesc corelate cu dimensiunile ferestrei sau
         //se poate implementa notiunea de camera/cadru de vizualizare al hartii
             ///Se stabileste latimea hartii in numar de dale.
-        width = 20;
+        width = 25;
             ///Se stabileste inaltimea hartii in numar de dale
         height = 10;
             ///Se construieste matricea de coduri de dale
         tiles = new int[width][height];
             //Se incarca matricea cu coduri
+        Scanner input;
         if(lvl == 1) {
-            for(int y = 0; y < height; y++)
-            {
-                for(int x = 0; x < width; x++)
+            try {
+                input = new Scanner(new File("res/map1.txt"));
+                for(int y = 0; y < height; y++)
                 {
-                    tiles[x][y] = Map1(y, x);
+                    for(int x = 0; x < width; x++)
+                    {
+                        if(input.hasNextInt())
+                            tiles[x][y] = input.nextInt();
+                    }
                 }
+                input.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(lvl == 2) {
+            try {
+                input = new Scanner(new File("res/map2.txt"));
+                for(int y = 0; y < height; y++)
+                {
+                    for(int x = 0; x < width; x++)
+                    {
+                        if(input.hasNextInt())
+                            tiles[x][y] = input.nextInt();
+                    }
+                }
+                input.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(lvl == 3) {
+            try {
+                input = new Scanner(new File("res/map3.txt"));
+                for(int y = 0; y < height; y++)
+                {
+                    for(int x = 0; x < width; x++)
+                    {
+                        if(input.hasNextInt())
+                            tiles[x][y] = input.nextInt();
+                    }
+                }
+                input.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -158,20 +195,14 @@ public class Map
         \param x linia pe care se afla codul dalei de interes.
         \param y coloana pe care se afla codul dalei de interes.
      */
-    private int Map1(int x ,int y)
-    {
-            ///Definire statica a matricei de coduri de dale.
-        final int map[][] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 3, 3, 3, 0, 2, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0},
-        {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}};
-        return map[x][y];
+    public int[][] GetTileMap() {return tiles;}
+    public void ChangeTile(int x, int y,int id) {
+        tiles[x][y] = id;
+    }
+    public int GetLevel(){
+        return currlevel;
+    }
+    public void SetLevel(int lvl){
+        currlevel = lvl;
     }
 }

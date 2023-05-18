@@ -11,7 +11,7 @@ import java.awt.*;
 public class MenuState extends State
 {
     private MainMenu menu;
-    private MenuButton[] menuButtons;
+
 
     /*! \fn public MenuState(RefLinks refLink)
         \brief Constructorul de initializare al clasei.
@@ -23,6 +23,7 @@ public class MenuState extends State
             ///Apel al constructorului clasei de baza.
         super(refLink);
         menu = new MainMenu(refLink);
+        refLink.SetMenu(menu);
     }
     /*! \fn public void Update()
         \brief Actualizeaza starea curenta a meniului.

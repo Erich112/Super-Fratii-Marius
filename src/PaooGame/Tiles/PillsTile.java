@@ -15,7 +15,7 @@ public class PillsTile extends Tile {
     public PillsTile(int id)
     {
             /// Apel al constructorului clasei de baza
-        super(Assets.pills, id);
+        super(Assets.GetInstance().pills, id);
     }
 
     /*! \fn public boolean IsSolid()

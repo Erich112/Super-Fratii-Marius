@@ -14,7 +14,7 @@ public class BallTile extends Tile
      */
     public BallTile(int id)
     {
-        super(Assets.ball, id);
+        super(Assets.GetInstance().ball, id);
     }
     @Override
     public boolean IsSolid()

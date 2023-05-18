@@ -21,6 +21,8 @@ public abstract class Item
     protected Rectangle normalBounds;   /*!< Dreptunghiul de coliziune aferent starii obisnuite(spatiul ocupat de entitate in mod normal), poate fi mai mic sau mai mare decat dimensiunea imaginii sale.*/
     protected Rectangle attackBounds;   /*!< Dreptunghiul de coliziune aferent starii de atac.*/
     protected RefLinks refLink;         /*!< O referinte catre un obiect "shortcut", obiect ce contine o serie de referinte utile in program.*/
+    protected float xDrawOffset = 9;
+    protected float yDrawOffset = 7;
 
     /*! \fn public Item(RefLinks refLink, float x, float y, int width, int height)
         \brief Constructor de initializare al clasei
