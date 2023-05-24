@@ -14,6 +14,7 @@ public class RefLinks
     private Map map;            /*!< Referinta catre harta curenta.*/
     private Camera camera;            /*!< Referinta catre camera curenta.*/
     private MainMenu menu;
+    private SettingsMenu smenu;
 
     /*! \fn public RefLinks(Game game)
         \brief Constructorul de initializare al clasei.
@@ -87,5 +88,7 @@ public class RefLinks
     public Camera GetCamera() {return camera;}
     public void SetCamera(Camera camera) {this.camera = camera;}
     public MainMenu GetMenu() {return menu;}
+    public SettingsMenu GetSettingsMenu() {return smenu;}
+    public void SetSettingsMenu(SettingsMenu smenu) {this.smenu = smenu;}
     public void SetMenu(MainMenu menu) {this.menu = menu;}
 }

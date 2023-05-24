@@ -1,4 +1,5 @@
 package PaooGame.UI;
+import PaooGame.Maps.Map;
 import PaooGame.RefLinks;
 import PaooGame.Tiles.Tile;
 import PaooGame.Graphics.*;
@@ -9,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 
-public class MainMenu {
+public class SettingsMenu {
     private BufferedImage background;
     private BufferedImage title;
     private BufferedImage copyright;
@@ -19,17 +20,15 @@ public class MainMenu {
 
     private boolean updateButtons = true; // Acest flag marcheaza momentul in care butoanele din meniu pot fi updatate
 
-    public MainMenu(RefLinks refLink) {
+    public SettingsMenu(RefLinks refLink) {
         Assets assets = Assets.GetInstance();
 
         /// Retine referinta "shortcut".
         this.refLink = refLink;
-        buttons = new MenuButton[5];
-        buttons[0] = new MenuButton(assets.play,  assets.playSelected);
-        buttons[1] = new MenuButton(assets.save, assets.saveSelected);
-        buttons[2] = new MenuButton(assets.load, assets.loadSelected);
-        buttons[3] = new MenuButton(assets.settings, assets.settingsSelected);
-        buttons[4] = new MenuButton(assets.credits, assets.creditsSelected);
+        buttons = new MenuButton[3];
+        buttons[0] = new MenuButton(assets.lvl1,  assets.lvl1Selected);
+        buttons[1] = new MenuButton(assets.lvl2, assets.lvl2Selected);
+        buttons[2] = new MenuButton(assets.lvl3, assets.lvl3Selected);
 
         buttons[currentBtn].isSelected = true;
     }
@@ -81,8 +80,10 @@ public class MainMenu {
         g.drawImage(background, 0, 0, refLink.GetGame().GetWidth(), refLink.GetGame().GetHeight(),null);
         int y = 40;
         for(int i=0; i<buttons.length; i++) {
-            buttons[i].Draw(g,20,y);
-            y += 40;
+                buttons[i].Draw(g,20,y);
+                y += 40;
+
+
         }
 
         g.drawImage(title,220,0,null);

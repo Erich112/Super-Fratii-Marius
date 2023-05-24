@@ -70,7 +70,7 @@ config=StructureConfiguration;
     "showPackageLevels": 2,
     "showDetailedClassStructure": true
   },
-  "rootClass": "PaooGame.Game",
+  "rootClass": "PaooGame.Main",
   "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
 }
 diagram meta data end '/
@@ -135,6 +135,18 @@ Game1161975619[
 <TR><TD ALIGN="LEFT" >+ StopGame()</TD></TR>
 <TR><TD ALIGN="LEFT" >- Update()</TD></TR>
 <TR><TD ALIGN="LEFT" >+ run()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Main1161975619[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Main</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
 </TABLE>>
 	style=filled
 	margin=0
@@ -744,6 +756,7 @@ Item887127349 -> Character887127349[arrowhead=none, arrowtail=empty, dir=both];
 Item887127349 -> Gun887127349[arrowhead=none, arrowtail=empty, dir=both];
 Item887127349 -> RefLinks1161975619[label="refLink
 [0..1]"];
+Main1161975619 -> Game1161975619[label="main() -> StartGame()"];
 MainMenu1020693217 -> MenuButton1020693217[label="buttons
 [0..*]"];
 MainMenu1020693217 -> RefLinks1161975619[label="refLink

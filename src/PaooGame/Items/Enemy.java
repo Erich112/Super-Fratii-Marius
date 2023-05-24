@@ -9,7 +9,7 @@ import PaooGame.Tiles.*;
 public class Enemy extends Character
 {
     private BufferedImage image;    /*!< Referinta catre imaginea curenta a eroului.*/
-    public Enemy(RefLinks refLink, float x, float y)
+    protected Enemy(RefLinks refLink, float x, float y)
     {
         ///Apel al constructorului clasei de baza
         super(refLink, x,y, Character.DEFAULT_CREATURE_WIDTH, Character.DEFAULT_CREATURE_HEIGHT);

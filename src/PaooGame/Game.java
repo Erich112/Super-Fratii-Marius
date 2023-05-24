@@ -230,26 +230,70 @@ public class Game implements Runnable
                 ///Actualizez starea curenta a jocului daca exista.
             State.GetState().Update();
         }
-        if(State.GetState() == menuState && refLink.GetMenu().getButtons()[0].isSelected == true && refLink.GetKeyManager().space)
-            State.SetState(playState);
-        if(State.GetState() == menuState && refLink.GetMenu().getButtons()[1].isSelected == true && refLink.GetKeyManager().space)
-            Save();
-        if(State.GetState() == menuState && refLink.GetMenu().getButtons()[2].isSelected == true && refLink.GetKeyManager().space)
-            Load();
-        if(State.GetState() == playState && refLink.GetKeyManager().escape)
+        //navigarea meniului
+        if(State.GetState() == menuState) {
+            if( refLink.GetMenu().getButtons()[0].isSelected && keyManager.space)
+                State.SetState(playState);
+            if(refLink.GetMenu().getButtons()[1].isSelected && keyManager.space)
+                Save();
+            if(refLink.GetMenu().getButtons()[2].isSelected && keyManager.space)
+                Load();
+            if(refLink.GetMenu().getButtons()[3].isSelected && keyManager.space) {
+                keyManager.space = false;
+                State.SetState(settingsState);
+            }
+            if(refLink.GetMenu().getButtons()[4].isSelected && keyManager.space)
+                State.SetState(aboutState);
+        }
+
+        if(State.GetState() == settingsState) {
+            System.out.println("in settings state cu spatiu " + keyManager.space);
+            if (keyManager.escape)
+                State.SetState(menuState);
+
+            if (refLink.GetSettingsMenu().getButtons()[0].isSelected) {
+                if (keyManager.space) {
+                    playState = null;
+                    Map.currlevel = 1;
+                    playState = new PlayState(refLink);
+                    State.SetState(playState);
+                    keyManager.space=false;
+                }
+            }
+            if (refLink.GetSettingsMenu().getButtons()[1].isSelected)
+                if(keyManager.space) {
+                    playState = null;
+                    Map.currlevel = 2;
+                    playState = new PlayState(refLink);
+                    State.SetState(playState);
+                    keyManager.space=false;
+                }
+            if (refLink.GetSettingsMenu().getButtons()[2].isSelected)
+                if(keyManager.space) {
+                    playState = null;
+                    Map.currlevel = 3;
+                    playState = new PlayState(refLink);
+                    State.SetState(playState);
+                    keyManager.space=false;
+                }
+        }
+
+        if(State.GetState() == aboutState && keyManager.escape)
             State.SetState(menuState);
+
+        //pune pauza, kinda
+        if(State.GetState() == playState && keyManager.escape)
+            State.SetState(menuState);
+
+        //tranzitia intre nivele
         if(State.GetState() == playState && refLink.GetMap().Clear == 1) {
-            if(refLink.GetKeyManager().space) {
+            if(keyManager.space) {
                 State.SetState(menuState);
                 playState = null;
                 Map.currlevel++;
                 playState = new PlayState(refLink);
             }
-            if(Map.currlevel==4) {
-                System.exit(0);
-            }
         }
-
     }
 
     /*! \fn private void Draw()
@@ -291,7 +335,7 @@ public class Game implements Runnable
 
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
+            //System.exit(0);
         }
         System.out.println("Save file created succesfully");
 

@@ -40,7 +40,7 @@ public class PlayState extends State
         refLink.SetMap(map);
             ///Construieste eroul
         hero = new Hero(refLink,40, 300);
-        enemy = new Enemy(refLink, 500, 300);
+        enemy = EnemyFactory.enemyMaker(refLink, 500, 300);
         gun = new Gun(refLink,500,200,Tile.TILE_WIDTH,Tile.TILE_HEIGHT);
         maxTilesOffset = map.GetWidth_Pixels() - refLink.GetWidth();
         maxLvlOffsetX = maxTilesOffset * Tile.TILE_WIDTH;
@@ -70,10 +70,14 @@ public class PlayState extends State
         map.Update();
         hero.Update();
         enemy.Update();
+        checkCloseBorder();
+
         float xIndex = hero.GetX() / Tile.TILE_WIDTH + 1;
         float yIndex = hero.GetY() / Tile.TILE_HEIGHT + 1;
         int val = map.GetTile((int) xIndex, (int) yIndex).GetId();
-        System.out.printf("%f\t%f\t%d\n",xIndex, yIndex, val);
+        //System.out.printf("%f\t%f\t%d\n",xIndex, yIndex, val);
+
+        //coliziuni cu iteme
         if (val == BallTile.ballTile.GetId()) {
             hero.score++;
             map.ChangeTile((int) xIndex, (int) yIndex,AirTile.airTile.GetId());
@@ -88,6 +92,8 @@ public class PlayState extends State
             map.ChangeTile((int) xIndex, (int) yIndex,AirTile.airTile.GetId());
             map.Clear = 1;
         }
+
+        //coliziuni cu inamicii
         float xIndexE = enemy.GetX() / Tile.TILE_WIDTH + 1;
         float yIndexE = enemy.GetY() / Tile.TILE_HEIGHT + 1;
         if(xIndex==xIndexE && yIndex==yIndexE) {
@@ -104,12 +110,13 @@ public class PlayState extends State
     @Override
     public void Draw(Graphics g)
     {
-        map.Draw(g);
+        map.Draw(g,xLvlOffset);
         hero.Draw(g);
         enemy.Draw(g);
         gun.Draw(g);
         if(map.Clear==1) {
-            g.drawString("THANK U, NEXT ", refLink.GetGame().GetWidth()/2,refLink.GetHeight()/2);
+            g.drawString("            BRAVO!            ", 300,refLink.GetHeight()/2);
+            g.drawString("APASA SPACE PT URMATORUL NIVEL", 300,refLink.GetHeight()/2 + 20);
         }
     }
 }

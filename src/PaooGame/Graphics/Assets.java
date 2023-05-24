@@ -34,6 +34,14 @@ public class Assets
     public BufferedImage load;
     public BufferedImage saveSelected;
     public BufferedImage loadSelected;
+    public BufferedImage lvl1;
+    public BufferedImage lvl2;
+    public BufferedImage lvl3;
+    public BufferedImage lvl1Selected;
+    public BufferedImage lvl2Selected;
+    public BufferedImage lvl3Selected;
+
+
 
     /*! \fn public static void Init()
         \brief Functia initializaza referintele catre elementele grafice utilizate.
@@ -64,16 +72,23 @@ public class Assets
         hp3 = ssheet.crop(0,3);
         hp2 = ssheet.crop(1,3);
         hp1 = ssheet.crop(2,3);
+
         //meniu
         play = msheet.crop(0,0);
         settings = msheet.crop(0,1);
         credits = msheet.crop(0,2);
         save = msheet.crop(0,3);
         load = msheet.crop(0, 4);
+        lvl1 = msheet.crop(0,5);
+        lvl2 = msheet.crop(0, 6);
+        lvl3 = msheet.crop(0,7);
         playSelected = msheet.crop(1,0);
         settingsSelected = msheet.crop(1,1);
         creditsSelected = msheet.crop(1,2);
         saveSelected = msheet.crop(1,3);
         loadSelected = msheet.crop(1,4);
+        lvl1Selected = msheet.crop(1,5);
+        lvl2Selected = msheet.crop(1, 6);
+        lvl3Selected = msheet.crop(1,7);
     }
 }

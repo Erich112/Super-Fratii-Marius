@@ -17,7 +17,6 @@ public class Map
 {
     private BufferedImage background;
     public static int currlevel = 1;
-    private int crazylvl = -1;
     private RefLinks refLink;   /*!< O referinte catre un obiect "shortcut", obiect ce contine o serie de referinte utile in program.*/
     private int width;          /*!< Latimea hartii in numar de dale.*/
     private int height;         /*!< Inaltimea hartii in numar de dale.*/
@@ -35,8 +34,11 @@ public class Map
         this.refLink = refLink;
             ///incarca harta de start. Functia poate primi ca argument id-ul hartii ce poate fi incarcat.
         LoadWorld(currlevel);
-
-        importImg("/textures/cer.png");
+        if(currlevel == 2)
+            importImg("/textures/cercrazy1.png");
+        else if (currlevel == 3)
+            importImg("/textures/cercrazy2.png");
+        else importImg("/textures/cer.png");
     }
     public int GetWidth_Tiles()
     {
@@ -48,7 +50,7 @@ public class Map
     }
     public int GetWidth_Pixels()
     {
-        return width*Tile.TILE_WIDTH;
+        return (width-1)*Tile.TILE_WIDTH;
     }
     public int GetHeigth_Pixels()
     {
@@ -95,7 +97,7 @@ public class Map
     //returneaza dimensiunile in pixeli
 
 
-    public void Draw(Graphics g)
+    public void Draw(Graphics g,int lvlOffset)
     {
         g.drawImage(background, 0, 0, Tile.TILE_WIDTH*width, height*Tile.TILE_HEIGHT,null);
 
@@ -104,7 +106,7 @@ public class Map
         {
             for(int x = 0; x < width; x++)
             {
-                GetTile(x, y).Draw(g, (int)(x * Tile.TILE_HEIGHT), (int)y * Tile.TILE_WIDTH);
+                GetTile(x, y).Draw(g, (int)(x * Tile.TILE_HEIGHT- lvlOffset), (int)y * Tile.TILE_WIDTH);
             }
         }
     }
